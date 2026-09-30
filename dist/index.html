@@ -17,7 +17,7 @@
     .topbar{display:none}
     .navbar{position:absolute;top:0;left:0;width:100%;background:linear-gradient(180deg,rgba(255,255,255,.88) 0%,rgba(255,255,255,.64) 58%,rgba(255,255,255,.16) 100%);border-bottom:0;backdrop-filter:blur(8px)}
     .products{grid-template-columns:1.2fr .9fr .9fr}.product:first-child{grid-row:auto}.product img,.product:first-child img{height:310px}
-    .location{grid-template-columns:1fr .75fr}.location-landmark{min-height:430px;border-radius:28px;padding:46px;background:linear-gradient(145deg,#eff9f2,#d7f0df);color:var(--blue);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 16px 40px #082b6818}.location-pin{width:82px;height:82px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#fff;font-size:2.5rem;box-shadow:0 14px 28px #27aa4b42;margin-bottom:22px}.location-landmark strong{font-family:'Archivo Black';font-size:clamp(1.8rem,3vw,2.8rem);line-height:1}.location-landmark span{margin-top:12px;color:#49617c}@media(max-width:900px){.location{grid-template-columns:1fr}.location-landmark{min-height:300px}}
+    .location{grid-template-columns:1fr .75fr}.location-map-image{min-height:430px;border-radius:28px;overflow:hidden;box-shadow:0 16px 40px #082b6818}.location-map-image img{width:100%;height:100%;min-height:430px;object-fit:cover}.color-list{display:flex;gap:7px;margin-top:13px}.color-dot{width:20px;height:20px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #cbd3df}.product-price{display:block;margin-top:12px;color:var(--blue);font-weight:800}@media(max-width:900px){.location{grid-template-columns:1fr}.location-map-image,.location-map-image img{min-height:300px}}
     .location{display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;align-items:stretch}.location-copy{background:var(--blue);color:#fff;border-radius:28px;padding:46px;display:flex;flex-direction:column;justify-content:center}.location-copy h2{font-family:'Archivo Black';font-size:clamp(2rem,4vw,3.3rem);line-height:1;margin:10px 0 18px}.location-copy p{color:#d9e4f5;margin:0 0 26px}.location-map{min-height:430px;border-radius:28px;overflow:hidden;box-shadow:0 16px 40px #082b6818}.location-map iframe{border:0;width:100%;height:100%;min-height:430px}.footer{padding:28px 0;background:#051733}.footer-simple{display:flex;align-items:center;justify-content:space-between;gap:24px}.footer-brand{display:flex;align-items:center;gap:12px}.footer-brand img{width:42px;height:42px;border-radius:50%}.footer-brand strong{color:#fff}.footer-meta{display:flex;align-items:center;gap:24px;font-size:.88rem}.footer-meta a{margin:0;color:#d8e2f1}.footer-meta a:hover{color:#6fea87}@media(max-width:900px){.location{grid-template-columns:1fr}.footer-simple{align-items:flex-start;flex-direction:column}.footer-meta{flex-wrap:wrap}}@media(max-width:560px){.location-copy{padding:34px 24px}.location-map,.location-map iframe{min-height:360px}.footer-meta{gap:12px 20px}}
   </style>
 </head>
@@ -40,7 +40,7 @@
 
   <section class="section" id="ambientes"><div class="wrap">
     <div class="section-head reveal"><div><span class="eyebrow" style="color:var(--green)">Para toda a casa</span><h2>Encontre seu estilo</h2></div><p>Peças para criar ambientes bonitos, práticos e acolhedores — do primeiro móvel à casa completa.</p></div>
-    <div class="categories">
+    <div class="categories" id="environmentGrid">
       <a class="cat reveal" href="https://wa.me/5562992270667?text=Olá!%20Quero%20ver%20opções%20para%20sala." target="_blank" rel="noopener"><img src="assets/produto-6.jpg" alt="Sofás para sala"><strong>Sala e estar</strong></a>
       <a class="cat reveal" href="https://wa.me/5562992270667?text=Olá!%20Quero%20ver%20opções%20de%20painéis%20e%20racks." target="_blank" rel="noopener"><img src="assets/produto-4.webp" alt="Painel para televisão"><strong>Painéis e racks</strong></a>
       <a class="cat reveal" href="https://wa.me/5562992270667?text=Olá!%20Quero%20ver%20opções%20para%20quarto." target="_blank" rel="noopener"><img src="assets/produto-1.webp" alt="Móveis para quarto"><strong>Quarto e conforto</strong></a>
@@ -50,7 +50,7 @@
 
   <section class="section light" id="destaques"><div class="wrap">
     <div class="section-head reveal"><div><span class="eyebrow" style="color:var(--green)">Destaques da loja</span><h2>Escolhas que fazem a diferença</h2></div><p>Confira algumas inspirações e chame nossa equipe para consultar cores, medidas e disponibilidade.</p></div>
-    <div class="products">
+    <div class="products" id="featuredProducts">
       <article class="product reveal"><img src="assets/produto-6.jpg" alt="Conjunto de sofás em tom caramelo"><div class="info"><small>Conforto para receber</small><h3>Sofás que viram o centro da casa</h3><p>Opções para diferentes espaços, estilos e momentos.</p></div></article>
       <article class="product reveal"><img src="assets/produto-4.webp" alt="Painel moderno para televisão"><div class="info"><small>Design atual</small><h3>Painéis e racks</h3><p>Organização com acabamento elegante.</p></div></article>
       <article class="product reveal"><img src="assets/produto-7.webp" alt="Quarto infantil completo"><div class="info"><small>Doce sonho</small><h3>Linha infantil</h3><p>Design, qualidade e aconchego.</p></div></article>
@@ -69,11 +69,22 @@
 
   <section class="section" id="localizacao"><div class="wrap"><div class="location">
     <div class="location-copy reveal"><span class="eyebrow">Venha nos visitar</span><h2>Jaiara Móveis em Anápolis</h2><p>Av. Fernando Costa, nº 544<br>Vila Jaiara — Anápolis, GO<br>CEP 75064-780</p><a class="btn" href="https://maps.app.goo.gl/MXtR99q6BpyLV8Cr9" target="_blank" rel="noopener">Abrir rota no Google Maps</a></div>
-    <div class="location-landmark reveal"><div class="location-pin" aria-hidden="true">⌖</div><strong>Vila Jaiara</strong><span>Anápolis, Goiás • P25J+XG</span></div>
+    <a class="location-map-image reveal" href="https://maps.app.goo.gl/MXtR99q6BpyLV8Cr9" target="_blank" rel="noopener" aria-label="Abrir localização da Jaiara Móveis no Google Maps"><img src="assets/mapa-jaiara.png" alt="Mapa ilustrativo com a localização da Jaiara Móveis"></a>
   </div></div></section>
 
-  <footer class="footer"><div class="wrap footer-simple"><div class="footer-brand"><img src="assets/logo.jpg" alt="Jaiara Móveis"><div><strong>Jaiara Móveis</strong><br><small>© 2026 • Todos os direitos reservados</small></div></div><div class="footer-meta"><span>Av. Fernando Costa, 544</span><a href="https://www.instagram.com/jaiara_moveis/" target="_blank" rel="noopener">Instagram</a><a href="https://maps.app.goo.gl/MXtR99q6BpyLV8Cr9" target="_blank" rel="noopener">Como chegar</a></div></div></footer>
+  <footer class="footer"><div class="wrap footer-simple"><div class="footer-brand"><img src="assets/logo.jpg" alt="Jaiara Móveis"><div><strong>Jaiara Móveis</strong><br><small>© 2026 • Todos os direitos reservados</small></div></div><div class="footer-meta"><span>Av. Fernando Costa, 544</span><a href="https://www.instagram.com/jaiara_moveis/" target="_blank" rel="noopener">Instagram</a><a href="https://maps.app.goo.gl/MXtR99q6BpyLV8Cr9" target="_blank" rel="noopener">Como chegar</a><a href="admin.html">Área administrativa</a></div></div></footer>
   <a class="floating" aria-label="Falar no WhatsApp" href="https://wa.me/5562992270667?text=Olá!%20Vim%20pelo%20site%20da%20Jaiara%20Móveis." target="_blank" rel="noopener">✆</a>
-  <script>const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));</script>
+  <script>
+    const storageKey='jaiara_catalog_v1';
+    const savedCatalog=JSON.parse(localStorage.getItem(storageKey)||'null');
+    const safe=s=>String(s||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    if(savedCatalog&&savedCatalog.environments?.length){
+      document.getElementById('environmentGrid').innerHTML=savedCatalog.environments.map(e=>`<a class="cat reveal" href="https://wa.me/5562992270667?text=${encodeURIComponent('Olá! Quero ver opções para '+e.name+'.')}" target="_blank" rel="noopener"><img src="${safe(e.image||'assets/sala-contato.png')}" alt="${safe(e.name)}"><strong>${safe(e.name)}</strong></a>`).join('');
+    }
+    if(savedCatalog&&savedCatalog.products?.some(p=>p.featured)){
+      document.getElementById('featuredProducts').innerHTML=savedCatalog.products.filter(p=>p.featured).map(p=>`<article class="product reveal"><img src="${safe(p.image||'assets/sala-contato.png')}" alt="${safe(p.name)}"><div class="info"><small>${safe(savedCatalog.environments?.find(e=>e.id===p.environmentId)?.name||'Destaque')}</small><h3>${safe(p.name)}</h3><p>${safe(p.description)}</p>${p.price?`<span class="product-price">${safe(p.price)}</span>`:''}${p.colors?.length?`<div class="color-list" aria-label="Cores disponíveis">${p.colors.map(c=>`<span class="color-dot" style="background:${safe(c)}" title="${safe(c)}"></span>`).join('')}</div>`:''}</div></article>`).join('');
+    }
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
 </body>
 </html>
