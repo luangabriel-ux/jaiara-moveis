@@ -19,6 +19,7 @@
     .products{grid-template-columns:1.2fr .9fr .9fr}.product:first-child{grid-row:auto}.product img,.product:first-child img{height:310px}
     .location{grid-template-columns:1fr .75fr}.location-map-image{min-height:430px;border-radius:28px;overflow:hidden;box-shadow:0 16px 40px #082b6818}.location-map-image img{width:100%;height:100%;min-height:430px;object-fit:cover}.color-list{display:flex;gap:7px;margin-top:13px;flex-wrap:wrap}.color-option{border:1px solid #cfd8e6;background:#fff;color:var(--blue);border-radius:999px;padding:7px 11px;font-size:.76rem;font-weight:800;cursor:pointer}.color-option:hover,.color-option.active{background:var(--blue);border-color:var(--blue);color:#fff}.product-price{display:block;margin-top:12px;color:var(--blue);font-weight:800}@media(max-width:900px){.location{grid-template-columns:1fr}.location-map-image,.location-map-image img{min-height:300px}}
     .location{display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;align-items:stretch}.location-copy{background:var(--blue);color:#fff;border-radius:28px;padding:46px;display:flex;flex-direction:column;justify-content:center}.location-copy h2{font-family:'Archivo Black';font-size:clamp(2rem,4vw,3.3rem);line-height:1;margin:10px 0 18px}.location-copy p{color:#d9e4f5;margin:0 0 26px}.location-map{min-height:430px;border-radius:28px;overflow:hidden;box-shadow:0 16px 40px #082b6818}.location-map iframe{border:0;width:100%;height:100%;min-height:430px}.footer{padding:28px 0;background:#051733}.footer-simple{display:flex;align-items:center;justify-content:space-between;gap:24px}.footer-brand{display:flex;align-items:center;gap:12px}.footer-brand img{width:42px;height:42px;border-radius:50%}.footer-brand strong{color:#fff}.footer-meta{display:flex;align-items:center;gap:24px;font-size:.88rem}.footer-meta a{margin:0;color:#d8e2f1}.footer-meta a:hover{color:#6fea87}@media(max-width:900px){.location{grid-template-columns:1fr}.footer-simple{align-items:flex-start;flex-direction:column}.footer-meta{flex-wrap:wrap}}@media(max-width:560px){.location-copy{padding:34px 24px}.location-map,.location-map iframe{min-height:360px}.footer-meta{gap:12px 20px}}
+    button.cat{width:100%;border:0;text-align:left;font:inherit;cursor:pointer}.cat.active{outline:4px solid #27aa4b;outline-offset:3px}.catalog-copy{display:flex;flex-direction:column;align-items:flex-start;gap:14px}.catalog-reset{border:1px solid var(--blue);background:transparent;color:var(--blue);border-radius:999px;padding:9px 15px;font:inherit;font-size:.82rem;font-weight:800;cursor:pointer}.catalog-reset:hover{background:var(--blue);color:#fff}.catalog-empty{grid-column:1/-1;background:#fff;border:1px dashed #b9c6d9;border-radius:22px;padding:42px;text-align:center;color:var(--muted)}.catalog-empty strong{display:block;color:var(--blue);font-size:1.15rem;margin-bottom:6px}
   </style>
 </head>
 <body>
@@ -49,7 +50,7 @@
   </div></section>
 
   <section class="section light" id="destaques"><div class="wrap">
-    <div class="section-head reveal"><div><span class="eyebrow" style="color:var(--green)">Destaques da loja</span><h2>Escolhas que fazem a diferença</h2></div><p>Confira algumas inspirações e chame nossa equipe para consultar cores, medidas e disponibilidade.</p></div>
+    <div class="section-head reveal"><div><span class="eyebrow" id="productSectionEyebrow" style="color:var(--green)">Destaques da loja</span><h2 id="productSectionTitle">Escolhas que fazem a diferença</h2></div><div class="catalog-copy"><p id="productSectionDescription">Confira algumas inspirações e chame nossa equipe para consultar cores, medidas e disponibilidade.</p><button class="catalog-reset" id="showFeatured" type="button" hidden>Voltar aos destaques</button></div></div>
     <div class="products" id="featuredProducts">
       <article class="product reveal"><img src="assets/produto-6.jpg" alt="Conjunto de sofás em tom caramelo"><div class="info"><small>Conforto para receber</small><h3>Sofás que viram o centro da casa</h3><p>Opções para diferentes espaços, estilos e momentos.</p></div></article>
       <article class="product reveal"><img src="assets/produto-4.webp" alt="Painel moderno para televisão"><div class="info"><small>Design atual</small><h3>Painéis e racks</h3><p>Organização com acabamento elegante.</p></div></article>
@@ -78,13 +79,44 @@
     const storageKey='jaiara_catalog_v1';
     const savedCatalog=JSON.parse(localStorage.getItem(storageKey)||'null');
     const safe=s=>String(s||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    const productsGrid=document.getElementById('featuredProducts');
+    const title=document.getElementById('productSectionTitle');
+    const description=document.getElementById('productSectionDescription');
+    const eyebrow=document.getElementById('productSectionEyebrow');
+    const resetButton=document.getElementById('showFeatured');
+    let renderCount=0;
+    const renderProducts=(products,options={})=>{
+      renderCount+=1;
+      eyebrow.textContent=options.eyebrow||'Destaques da loja';
+      title.textContent=options.title||'Escolhas que fazem a diferença';
+      description.textContent=options.description||'Confira algumas inspirações e chame nossa equipe para consultar cores, medidas e disponibilidade.';
+      resetButton.hidden=!options.showReset;
+      if(!products.length){productsGrid.innerHTML='<div class="catalog-empty"><strong>Nenhum produto cadastrado neste ambiente ainda.</strong>Fale com nossa equipe para conhecer outras opções disponíveis.</div>';return;}
+      productsGrid.innerHTML=products.map((p,i)=>{const variants=(p.variants||[]).filter(v=>v.image);const image=variants[0]?.image||p.image||'assets/sala-contato.png';const imageId=`productImage${renderCount}_${i}`;return `<article class="product reveal visible"><img id="${imageId}" src="${safe(image)}" alt="${safe(p.name)}"><div class="info"><small>${safe(savedCatalog.environments?.find(e=>e.id===p.environmentId)?.name||'Produto')}</small><h3>${safe(p.name)}</h3><p>${safe(p.description)}</p>${p.price?`<span class="product-price">${safe(p.price)}</span>`:''}${variants.length?`<div class="color-list" aria-label="Cores disponíveis">${variants.map((v,j)=>`<button class="color-option ${j===0?'active':''}" type="button" data-target="${imageId}" data-image="${safe(v.image)}" aria-label="Ver ${safe(p.name)} na cor ${safe(v.name)}">${safe(v.name)}</button>`).join('')}</div>`:''}</div></article>`}).join('');
+    };
+    const showFeatured=()=>{
+      document.querySelectorAll('.environment-option').forEach(x=>x.classList.remove('active'));
+      const featured=savedCatalog?.products?.filter(p=>p.featured)||[];
+      if(featured.length)renderProducts(featured);
+      else if(savedCatalog?.products?.length)renderProducts(savedCatalog.products,{eyebrow:'Catálogo',title:'Todos os produtos',description:'Conheça os produtos cadastrados pela Jaiara Móveis.'});
+    };
     if(savedCatalog&&savedCatalog.environments?.length){
-      document.getElementById('environmentGrid').innerHTML=savedCatalog.environments.map(e=>`<a class="cat reveal" href="https://wa.me/5562992270667?text=${encodeURIComponent('Olá! Quero ver opções para '+e.name+'.')}" target="_blank" rel="noopener"><img src="${safe(e.image||'assets/sala-contato.png')}" alt="${safe(e.name)}"><strong>${safe(e.name)}</strong></a>`).join('');
+      document.getElementById('environmentGrid').innerHTML=savedCatalog.environments.map(e=>`<button class="cat reveal visible environment-option" type="button" data-environment="${safe(e.id)}" aria-label="Ver produtos de ${safe(e.name)}"><img src="${safe(e.image||'assets/sala-contato.png')}" alt="${safe(e.name)}"><strong>${safe(e.name)}</strong></button>`).join('');
+      showFeatured();
     }
-    if(savedCatalog&&savedCatalog.products?.some(p=>p.featured)){
-      document.getElementById('featuredProducts').innerHTML=savedCatalog.products.filter(p=>p.featured).map((p,i)=>{const variants=p.variants||[];const image=variants[0]?.image||p.image||'assets/sala-contato.png';return `<article class="product reveal"><img id="productImage${i}" src="${safe(image)}" alt="${safe(p.name)}"><div class="info"><small>${safe(savedCatalog.environments?.find(e=>e.id===p.environmentId)?.name||'Destaque')}</small><h3>${safe(p.name)}</h3><p>${safe(p.description)}</p>${p.price?`<span class="product-price">${safe(p.price)}</span>`:''}${variants.length?`<div class="color-list" aria-label="Cores disponíveis">${variants.map((v,j)=>`<button class="color-option ${j===0?'active':''}" type="button" data-target="productImage${i}" data-image="${safe(v.image)}">${safe(v.name)}</button>`).join('')}</div>`:''}</div></article>`}).join('');
-    }
-    document.addEventListener('click',e=>{const b=e.target.closest('.color-option');if(!b)return;const img=document.getElementById(b.dataset.target);if(img&&b.dataset.image)img.src=b.dataset.image;b.parentElement.querySelectorAll('.color-option').forEach(x=>x.classList.toggle('active',x===b))});
+    resetButton.addEventListener('click',showFeatured);
+    document.addEventListener('click',e=>{
+      const environmentButton=e.target.closest('.environment-option');
+      if(environmentButton&&savedCatalog){
+        document.querySelectorAll('.environment-option').forEach(x=>x.classList.toggle('active',x===environmentButton));
+        const environment=savedCatalog.environments.find(item=>String(item.id)===environmentButton.dataset.environment);
+        const products=savedCatalog.products?.filter(p=>String(p.environmentId)===environmentButton.dataset.environment)||[];
+        renderProducts(products,{eyebrow:'Produtos do ambiente',title:environment?.name||'Ambiente',description:`Veja os produtos cadastrados em ${environment?.name||'este ambiente'} e escolha sua cor preferida.`,showReset:true});
+        document.getElementById('destaques').scrollIntoView({behavior:'smooth',block:'start'});
+        return;
+      }
+      const b=e.target.closest('.color-option');if(!b)return;const img=document.getElementById(b.dataset.target);if(img&&b.dataset.image)img.src=b.dataset.image;b.parentElement.querySelectorAll('.color-option').forEach(x=>x.classList.toggle('active',x===b));
+    });
     const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   </script>
 </body>
