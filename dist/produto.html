@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Produto — Jaiara Móveis</title>
+  <meta name="description" content="Confira os detalhes, cores e condições deste produto da Jaiara Móveis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--blue:#082b68;--green:#27aa4b;--ink:#10213a;--muted:#69778b;--line:#dce3ee}*{box-sizing:border-box}body{margin:0;background:#f6f7fb;color:var(--ink);font:16px/1.6 Manrope,Arial,sans-serif}a{color:inherit}button{font:inherit;cursor:pointer}.wrap{width:min(1160px,calc(100% - 36px));margin:auto}header{background:#fff;border-bottom:1px solid var(--line);padding:18px 0}header .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--blue);text-decoration:none}.brand img{width:48px;height:48px;border-radius:50%}.back{font-weight:700;color:var(--blue)}main{padding:32px 0 64px}.breadcrumb{color:var(--muted);margin-bottom:24px}.product-detail{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:start}.photo{background:#fff;border-radius:24px;overflow:hidden;border:1px solid var(--line)}.photo img{display:block;width:100%;height:560px;object-fit:contain}.info{background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px}.category{color:var(--green);font-weight:800}.info h1{font-family:'Archivo Black',Arial,sans-serif;color:var(--blue);font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.15;margin:12px 0 20px;overflow-wrap:anywhere}.price{font-weight:800;font-size:1.4rem;color:var(--blue);margin-bottom:22px}.description{white-space:pre-wrap;overflow-wrap:anywhere;color:#475569}.colors{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 24px}.color{border:1px solid var(--line);border-radius:999px;padding:9px 16px;background:#fff;color:var(--blue);font-weight:700}.color.active{background:var(--blue);color:#fff;border-color:var(--blue)}.cta{display:block;text-align:center;background:var(--green);color:white;padding:16px 20px;border-radius:14px;text-decoration:none;font-weight:800}.conditions{font-size:.85rem;color:var(--muted);margin-top:20px}.status{background:#fff;padding:36px;border-radius:24px;text-align:center}.status h1{color:var(--blue)}footer{padding:24px;background:var(--blue);color:#fff;text-align:center}[hidden]{display:none!important}@media(max-width:760px){.product-detail{grid-template-columns:1fr;gap:20px}.photo img{height:380px}.info{padding:24px}header .wrap{flex-wrap:wrap}}@media(max-width:420px){.photo img{height:300px}}
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><a class="brand" href="/"><img src="assets/logo.jpg" alt=""><span>Jaiara Móveis</span></a><a class="back" href="/#destaques">← Voltar ao catálogo</a></div></header>
+  <main class="wrap">
+    <div class="breadcrumb">Catálogo / <span id="breadcrumbName">Produto</span></div>
+    <div class="status" id="status" role="status">Carregando produto…</div>
+    <article class="product-detail" id="detail" hidden>
+      <div class="photo"><img id="productPhoto" alt=""></div>
+      <div class="info"><span class="category" id="category"></span><h1 id="productName"></h1><div class="price" id="price"></div>
+        <h2 style="font-size:1rem">Descrição do produto</h2><p class="description" id="description"></p>
+        <div id="colorSection" hidden><strong id="selectedColor"></strong><div class="colors" id="colors" aria-label="Cores disponíveis"></div></div>
+        <a class="cta" id="interest" target="_blank" rel="noopener noreferrer">Tenho interesse neste produto</a>
+        <p class="conditions">Dinheiro, Pix, cartões e crediário em até 12x. Pagamento à distância por link. Consulte nossa equipe sobre disponibilidade e condições.</p>
+      </div>
+    </article>
+  </main>
+  <footer>Jaiara Móveis · Anápolis, GO · (62) 99227-0667</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="product-config.js"></script>
+  <script src="product.js"></script>
+</body>
+</html>

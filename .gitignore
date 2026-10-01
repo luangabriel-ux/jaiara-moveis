@@ -1,2 +1,7 @@
 jaiara-moveis-deploy.tar.gz
 
+
+# Artefatos de publicação e capturas locais
+jaiara-moveis-netlify.zip
+/*.jpg
+/produto-detalhes.png
