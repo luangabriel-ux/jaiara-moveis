@@ -77,3 +77,8 @@ create policy "Public read product images" on storage.objects for select to anon
 create policy "Admins upload product images" on storage.objects for insert to authenticated with check (bucket_id = 'product-images' and public.is_admin());
 create policy "Admins update product images" on storage.objects for update to authenticated using (bucket_id = 'product-images' and public.is_admin()) with check (bucket_id = 'product-images' and public.is_admin());
 create policy "Admins delete product images" on storage.objects for delete to authenticated using (bucket_id = 'product-images' and public.is_admin());
+
+-- Ambiente automático usado pelo painel para produtos sem seleção de ambiente.
+insert into public.environments (id, name, image_url, position)
+values ('00000000-0000-4000-8000-000000000001', 'Outros', '', 2147483647)
+on conflict (id) do nothing;

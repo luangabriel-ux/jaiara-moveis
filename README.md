@@ -42,7 +42,15 @@ O catálogo público e o painel utilizam Supabase. Somente e-mails cadastrados e
 
 Toda atualização deve ser verificada, registrada em commit e enviada ao GitHub pelo remoto `origin`. As instruções permanentes estão em `AGENTS.md`. O remoto `sites` deve ser preservado.
 
-Os testes `test-primary.cjs` e `test-product.cjs` verificam a imagem principal e a página de detalhes. O segundo precisa de Playwright e Microsoft Edge instalados. Executar com Node.js; se as dependências estiverem fora do projeto, definir `NODE_PATH` para o diretório que contém Playwright.
+Os testes `test-primary.cjs`, `test-product.cjs` e `test-admin-edit.cjs` verificam imagem principal, página de detalhes, edição e regras do ambiente Outros. Os dois últimos precisam de Playwright e Microsoft Edge instalados. Executar com Node.js; se as dependências estiverem fora do projeto, definir `NODE_PATH` para o diretório que contém Playwright. Os testes de interface usam dados controlados, sem alterar o catálogo real.
 
 No catálogo, a foto, o nome e o link "Ver detalhes" abrem a página do produto. O botão "Tenho interesse neste produto" abre o WhatsApp da loja com nome do produto, cor selecionada (quando informada) e link dos detalhes. Nenhuma mensagem é enviada automaticamente.
+
+## Edição e ambientes
+
+Editar um ambiente abre uma tela própria com seus dados e os produtos vinculados. Cada produto tem uma tela de edição com dados preenchidos, ambiente, preço, destaque, cor e imagem principal e demais cores. Cancelar ou voltar retorna à lista de origem; recarregar uma URL de edição reabre o registro.
+
+O painel cria automaticamente o ambiente Outros se necessário. Sem seleção de ambiente, o produto é salvo em Outros, que fica sempre por último na vitrine. Seus dados não podem ser editados ou excluídos pelo painel; a opção Ver produtos permite acessar e mover seus produtos.
+
+Ao excluir outro ambiente, o painel transfere seus produtos para Outros antes de excluir o ambiente. Se a transferência falhar, a exclusão não ocorre. Se apenas a exclusão falhar, os produtos permanecem em Outros e o painel informa o resultado. Essas operações são sequenciais. As proteções de Outros são regras do painel; usuários com acesso direto de administrador ao Supabase ainda têm as permissões existentes do banco.
 

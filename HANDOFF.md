@@ -142,3 +142,16 @@ Limite: o navegador de controle não respondeu em duas tentativas. Os testes aci
 - Preferência permanente do usuário registrada em AGENTS.md: finalizar mudanças com commit e push para origin.
 - Esta entrega inclui as mudanças locais anteriores de Supabase, Netlify, formas de pagamento e imagem principal.
 - ZIP atualizado. A nova página ainda NÃO foi publicada pelo agente no Netlify: controle do navegador continua expirando. A publicação anterior da correção principal foi confirmada pelo usuário.
+
+## Telas de edição e ambiente Outros — 1 de outubro de 2026
+
+- Editar abre uma tela própria com os campos preenchidos e a imagem atual; ambiente mostra produtos vinculados e permite abrir sua edição.
+- Edição de produto inclui ambiente, descrição, preço, destaque, imagem/cor principal e demais cores; salvar e cancelar retornam à origem.
+- URLs com hash permitem reabrir a tela de edição ao recarregar; registro inexistente retorna ao catálogo com aviso.
+- Ambiente Outros (ID 00000000-0000-4000-8000-000000000001) criado automaticamente no primeiro carregamento administrativo desta versão, se ausente; esquema SQL atualizado para instalações novas.
+- Sem seleção de ambiente, produto vai para Outros. Outros é o último no painel/vitrine; nome e imagem não editáveis pelo painel; sem botão Excluir. Ver produtos permite mover os produtos normalmente.
+- Excluir um ambiente transfere todos os seus produtos para Outros antes de excluir; falha na transferência preserva o ambiente. Falha na exclusão após transferência deixa os produtos em Outros e informa a situação.
+- Não há transação única nem nova restrição no banco: proteção de Outros é aplicada pelo painel, enquanto administradores diretos do Supabase continuam com as permissões existentes.
+- Testes de interface com backend simulado em Edge: edição/preenchimento, salvar, mover produto e cores, cancelar, reabrir após recarga, erro de gravação, Outros automático/protegido, transferência na exclusão e falha segura aprovados. Layout móvel verificado.
+- Nenhum produto real foi alterado por estes testes.
+- Versão preparada em ZIP para o Netlify; publicação desta atualização ainda pendente.
