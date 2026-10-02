@@ -164,3 +164,10 @@ Limite: o navegador de controle não respondeu em duas tentativas. Os testes aci
 - test-responsive.cjs aprovado em Edge com seis produtos simulados nas larguras 320, 390, 560, 561, 768, 900, 901 e 1280px; colunas, limites dos cards, ausência de transbordamento e troca de cor móvel verificados.
 - test-primary.cjs e test-product.cjs também aprovados. Nenhum produto real alterado.
 - ZIP atualizado para publicação manual. Esta correção ainda NÃO foi publicada no Netlify; push no GitHub não dispara publicação automática.
+
+## Publicação confirmada — 2 de outubro de 2026
+
+- ZIP atualizado enviado ao projeto existente jaiara-moveis no Netlify Drop.
+- Deploy 6abfabb5c6b8f9611456f439 confirmado como Currently published / Production.
+- Site público https://jaiara-moveis.netlify.app/ verificado em 390px: sete produtos carregados, uma coluna e sem transbordamento horizontal.
+- Esta publicação inclui o conteúdo atual de dist/, com a correção de responsividade. Pendências de publicação anteriores deste documento ficam superadas para os arquivos atuais.
