@@ -48,6 +48,8 @@ No catálogo, a foto, o nome e o link "Ver detalhes" abrem a página do produto.
 
 ## Edição e ambientes
 
+O catálogo de destaques e os produtos filtrados por ambiente usam uma coluna até 560px, duas até 900px e três em telas maiores. Os cards têm larguras uniformes, com textos e opções de cor contidos no card. Executar `node test-responsive.cjs` com Playwright para verificar os limites de tela de 320 a 1280px. Correção preparada em 2 de outubro de 2026; publicação no Netlify pendente.
+
 Editar um ambiente abre uma tela própria com seus dados e os produtos vinculados. Cada produto tem uma tela de edição com dados preenchidos, ambiente, preço, destaque, cor e imagem principal e demais cores. Cancelar ou voltar retorna à lista de origem; recarregar uma URL de edição reabre o registro.
 
 O painel cria automaticamente o ambiente Outros se necessário. Sem seleção de ambiente, o produto é salvo em Outros, que fica sempre por último na vitrine. Seus dados não podem ser editados ou excluídos pelo painel; a opção Ver produtos permite acessar e mover seus produtos.

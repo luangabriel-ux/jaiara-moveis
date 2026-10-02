@@ -155,3 +155,12 @@ Limite: o navegador de controle não respondeu em duas tentativas. Os testes aci
 - Testes de interface com backend simulado em Edge: edição/preenchimento, salvar, mover produto e cores, cancelar, reabrir após recarga, erro de gravação, Outros automático/protegido, transferência na exclusão e falha segura aprovados. Layout móvel verificado.
 - Nenhum produto real foi alterado por estes testes.
 - Versão preparada em ZIP para o Netlify; publicação desta atualização ainda pendente.
+
+## Responsividade do catálogo — 2 de outubro de 2026
+
+- Corrigida regra posterior que sobrescrevia as media queries e mantinha três colunas no celular.
+- Destaques e filtro por ambiente agora usam uma coluna até 560px, duas até 900px e três acima de 900px, com cards de mesma largura e sem tratamento especial do primeiro card.
+- Textos longos e botões de cores ficam contidos nos cards.
+- test-responsive.cjs aprovado em Edge com seis produtos simulados nas larguras 320, 390, 560, 561, 768, 900, 901 e 1280px; colunas, limites dos cards, ausência de transbordamento e troca de cor móvel verificados.
+- test-primary.cjs e test-product.cjs também aprovados. Nenhum produto real alterado.
+- ZIP atualizado para publicação manual. Esta correção ainda NÃO foi publicada no Netlify; push no GitHub não dispara publicação automática.
